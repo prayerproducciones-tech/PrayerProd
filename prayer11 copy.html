@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRAYER PRODUCCIONES | Creando con Propósito</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .nebula {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 10% 10%, rgba(153, 27, 27, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(153, 27, 27, 0.08) 0%, transparent 40%),
+                #050505;
+        }
+
+        .nav-pill {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 100px;
+            width: 98%;
+            max-width: 1100px;
+            padding: 6px 16px;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        @media (min-width: 768px) {
+            .nav-pill { padding: 8px 30px; }
+        }
+
+        .nav-logo { height: 60px; width: auto; object-fit: contain; }
+
+        .mega-title {
+            font-size: clamp(32px, 9vw, 140px);
+            line-height: 0.8;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 640px) {
+            .mega-title { font-size: clamp(28px, 7vw, 48px); }
+        }
+
+        .subtitle-smaller { font-size: 0.7em; display: block; margin-top: 8px; }
+
+        /* Estilos Portafolio Carousel */
+        .portfolio-swiper {
+            width: 100%;
+            padding: 50px 0;
+        }
+
+        .portfolio-video-card {
+            aspect-ratio: 9 / 16;
+            background: #0d0d0d;
+            border-radius: 35px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .portfolio-video-card video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .category-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 24px;
+            border-radius: 100px;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            transition: all 0.3s ease;
+            color: #888;
+        }
+
+        .category-btn.active {
+            background: #b91c1c;
+            color: white;
+            border-color: #ef4444;
+            box-shadow: 0 10px 20px rgba(185, 28, 28, 0.3);
+        }
+
+        /* Estilos Swiper Global */
+        .swiper-pagination-bullet { background: rgba(255, 255, 255, 0.2); }
+        .swiper-pagination-bullet-active { background: #b91c1c !important; }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            padding: 24px;
+            transition: all 0.4s ease;
+        }
+
+        @media (min-width: 768px) {
+            .service-card { border-radius: 40px; padding: 40px; }
+        }
+
+        .plan-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 28px;
+            padding: 24px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (min-width: 768px) {
+            .plan-card { border-radius: 48px; padding: 45px; }
+        }
+
+        .featured-card {
+            background: linear-gradient(180deg, rgba(153, 27, 27, 0.15) 0%, rgba(5, 5, 5, 1) 100%);
+            border: 1px solid rgba(153, 27, 27, 0.5);
+        }
+
+        .reveal { opacity: 0; transform: translateY(40px); }
+    </style>
+</head>
+<body>
+    <div class="nebula"></div>
+
+    <header class="fixed top-4 sm:top-8 left-0 right-0 z-[100] px-2 sm:px-4 flex justify-center">
+        <nav class="nav-pill flex justify-between items-center w-full">
+            <a href="#"><img src="LOGO PRAYER WEB 2.png" alt="PRAYER" class="nav-logo h-10 sm:h-[60px]"></a>
+            <div class="hidden md:flex gap-6 lg:gap-10 text-[9px] lg:text-[10px] font-black uppercase tracking-[0.25em] text-gray-400">
+                <a href="#servicios" class="hover:text-white transition">Servicios</a>
+                <a href="#portafolio" class="hover:text-white transition">Portafolio</a>
+                <a href="#planes" class="hover:text-white transition">Planes</a>
+            </div>
+            <a href="https://wa.me/573171157534" class="bg-white text-black px-5 sm:px-7 py-1.5 sm:py-2 rounded-full text-[8px] sm:text-[9px] font-black uppercase hover:bg-red-700 hover:text-white transition-all">Cotizar</a>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 pt-32 sm:pt-64 pb-16 sm:pb-32">
+        
+        <section class="text-center mb-32 sm:mb-64 reveal">
+            <h1 class="mega-title mb-10">PRAYER <br> <span class="text-red-700">PRODUCCIONES</span></h1>
+            <p class="text-lg md:text-2xl font-bold uppercase tracking-[0.45em] text-gray-300">Creando con propósito</p>
+            <div class="mt-8 sm:mt-16 mx-auto w-full sm:max-w-4xl lg:max-w-5xl">
+                <video autoplay muted loop playsinline class="w-full aspect-video sm:aspect-video rounded-2xl sm:rounded-3xl border border-red-700/30">
+                    <source src="Prayer Primer ADS 16.9.mov" type="video/mp4">
+                </video>
+            </div>
+        </section>
+
+        <section id="servicios" class="mb-32 sm:mb-64">
+            <div class="mb-12 sm:mb-20 reveal text-center">
+                <h2 class="mega-title">NUESTROS <br><span class="text-red-700 subtitle-smaller">SERVICIOS</span></h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="service-card reveal">
+                    <span class="text-red-700 font-black text-xl">01</span>
+                    <h3 class="text-xl font-black uppercase mt-6 mb-4">Reels Estratégicos</h3>
+                    <p class="text-gray-500 text-[11px] uppercase tracking-widest leading-relaxed">Contenido diseñado para captar atención en segundos.</p>
+                </div>
+                <div class="service-card reveal">
+                    <span class="text-red-700 font-black text-xl">02</span>
+                    <h3 class="text-xl font-black uppercase mt-6 mb-4">Meta Ads</h3>
+                    <p class="text-gray-500 text-[11px] uppercase tracking-widest leading-relaxed">Campañas enfocadas en ventas y escalabilidad real.</p>
+                </div>
+                <div class="service-card reveal">
+                    <span class="text-red-700 font-black text-xl">03</span>
+                    <h3 class="text-xl font-black uppercase mt-6 mb-4">Producción Premium</h3>
+                    <p class="text-gray-500 text-[11px] uppercase tracking-widest leading-relaxed">Videos de alto impacto visual para marcas Élite.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PORTAFOLIO CARRUSEL DINÁMICO -->
+        <section id="portafolio" class="mb-64">
+            <div class="mb-12 sm:mb-20 reveal text-center">
+                <h2 class="mega-title">PORTA<span class="text-red-700">FOLIO</span></h2>
+                <div class="flex flex-wrap justify-center gap-4 mt-12">
+                    <button class="category-btn active" onclick="filterPortfolio('reels', this)">Reels</button>
+                    <button class="category-btn" onclick="filterPortfolio('flyers', this)">Flyers</button>
+                    <button class="category-btn" onclick="filterPortfolio('fotografia', this)">Fotografía</button>
+                    <button class="category-btn" onclick="filterPortfolio('videos-musicales', this)">Videos Musicales</button>
+                    <button class="category-btn" onclick="filterPortfolio('branding', this)">Branding</button>
+                </div>
+            </div>
+
+            <div class="reveal">
+                <div class="swiper portfolioSwiper portfolio-swiper">
+                    <div class="swiper-wrapper" id="portfolio-wrapper">
+                        <!-- Se llena dinámicamente con JS -->
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="planes" class="mb-64 overflow-visible">
+            <div class="mb-12 sm:mb-20 reveal text-center">
+                <h2 class="mega-title">PLANES DE <br><span class="text-red-700 subtitle-smaller">SERVICIOS</span></h2>
+            </div>
+            <div class="swiper mySwiper reveal">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="plan-card">
+                            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+                                <div>
+                                    <h3 class="text-4xl font-black uppercase text-white mb-2">PLAN IMPULSO 🚀</h3>
+                                    <p class="text-[10px] text-gray-400 uppercase tracking-widest font-bold leading-relaxed max-w-sm">Ideal para: Negocios que desean comenzar a fortalecer su presencia digital con contenido profesional.</p>
+                                </div>
+                                <div class="text-left md:text-right">
+                                    <span class="text-[9px] font-black text-red-600 block uppercase tracking-widest mb-1">Inversión Mensual</span>
+                                    <div class="text-3xl font-black text-white">$999.600</div>
+                                    <span class="text-[8px] font-bold text-gray-500 uppercase tracking-widest">IVA Incluido</span>
+                                </div>
+                            </div>
+                            <div class="grid md:grid-cols-2 gap-x-8 gap-y-3 mb-10">
+                                <ul class="text-[10px] text-gray-300 uppercase tracking-widest space-y-3 list-none">
+                                    <li>✅ 4 Reels Estratégicos Mensuales</li>
+                                    <li>✅ 4 Diseños Publicitarios</li>
+                                    <li>✅ 1 Jornada de Grabación Mensual</li>
+                                    <li>✅ Edición Profesional</li>
+                                </ul>
+                                <ul class="text-[10px] text-gray-300 uppercase tracking-widest space-y-3 list-none">
+                                    <li>✅ Copy Básico para Publicaciones</li>
+                                    <li>✅ Asesoría Básica de Contenido</li>
+                                    <li>✅ Optimización Visual de Perfil</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white/5 rounded-3xl p-6 border border-white/10 mb-8">
+                                <h4 class="text-[10px] font-black text-white uppercase mb-3 tracking-widest">Perfecto para:</h4>
+                                <div class="flex flex-wrap gap-x-4 gap-y-2 text-[8px] font-bold text-gray-400 uppercase tracking-widest">
+                                    <span>• Marcas personales</span> <span>• Restaurantes</span> <span>• Emprendimientos</span> <span>• Negocios locales</span>
+                                </div>
+                            </div>
+                            <div class="mt-auto text-center border-t border-white/10 pt-6">
+                                <p class="text-[9px] text-red-600 font-black uppercase tracking-widest mb-6 italic">IMPORTANTE: No incluye Meta Ads.</p>
+                                <a href="https://wa.me/573171157534" class="bg-white/10 text-white py-5 rounded-2xl text-[12px] font-black uppercase w-full block hover:bg-white hover:text-black transition">Seleccionar Impulso</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="plan-card featured-card">
+                            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+                                <div>
+                                    <h3 class="text-4xl font-black uppercase text-white mb-2">CRECIMIENTO ⭐</h3>
+                                    <p class="text-[10px] text-red-400 uppercase tracking-widest font-bold leading-relaxed max-w-md">Ideal para: Negocios que quieren aumentar clientes, verse más profesionales y empezar a escalar.</p>
+                                </div>
+                                <div class="text-left md:text-right">
+                                    <span class="text-[9px] font-black text-red-600 block uppercase tracking-widest mb-1">Inversión Mensual</span>
+                                    <div class="text-4xl font-black text-white">$2.737.000</div>
+                                    <span class="text-[8px] font-bold text-red-500/60 uppercase tracking-widest">IVA Incluido</span>
+                                </div>
+                            </div>
+                            <div class="grid md:grid-cols-2 gap-x-8 gap-y-3 mb-8">
+                                <ul class="text-[10px] text-gray-300 uppercase tracking-widest space-y-3 list-none">
+                                    <li>✅ 8 Reels Estratégicos Mensuales</li>
+                                    <li>✅ 6 Diseños Publicitarios Premium</li>
+                                    <li>✅ 2 Jornadas de Grabación Profesional</li>
+                                    <li>✅ Edición Avanzada de Contenido</li>
+                                    <li>✅ Planeación Estratégica Mensual</li>
+                                </ul>
+                                <ul class="text-[10px] text-gray-300 uppercase tracking-widest space-y-3 list-none">
+                                    <li>✅ Optimización de Perfil</li>
+                                    <li>✅ Copywriting para Publicaciones</li>
+                                    <li>✅ Administración Básica Meta Ads</li>
+                                    <li>✅ Seguimiento y Optimización</li>
+                                    <li>✅ Asesoría de Crecimiento Digital</li>
+                                </ul>
+                            </div>
+                            <div class="bg-red-700/10 rounded-3xl p-6 border border-red-700/30 mb-8">
+                                <h4 class="text-[11px] font-black text-red-500 uppercase mb-3 tracking-[0.2em]">Ejemplo de Escalamiento:</h4>
+                                <div class="space-y-4">
+                                    <p class="text-[10px] text-gray-300 leading-relaxed uppercase tracking-wide">Si tu negocio pasa de vender <span class="text-white font-bold">$10M</span> a <span class="text-white font-bold">$15M</span> gracias a nuestras estrategias...</p>
+                                    <div class="flex items-center gap-4 bg-black/40 p-3 rounded-xl border border-white/5">
+                                        <div class="text-red-600 font-black text-xl">➔</div>
+                                        <p class="text-[10px] text-gray-400 italic">El porcentaje se aplica <span class="text-red-500 font-bold text-xs">únicamente sobre el crecimiento</span> generado ($5M).</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-auto text-center border-t border-white/10 pt-6">
+                                <p class="text-[10px] text-gray-500 uppercase font-black tracking-widest mb-6"><span class="text-white">IMPORTANTE:</span> La pauta publicitaria NO está incluida.</p>
+                                <a href="https://wa.me/573171157534" class="bg-white text-black py-5 rounded-2xl text-[12px] font-black uppercase w-full block hover:bg-red-700 hover:text-white transition shadow-xl shadow-red-900/20">Comenzar Crecimiento</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="plan-card">
+                            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+                                <div>
+                                    <h3 class="text-4xl font-black uppercase text-white mb-2">PLAN PRAYER 💎</h3>
+                                    <p class="text-[10px] text-gray-400 uppercase tracking-widest font-bold leading-relaxed max-w-md">Ideal para: Marcas que buscan posicionamiento fuerte y presencia digital de alto nivel.</p>
+                                </div>
+                                <div class="text-left md:text-right">
+                                    <span class="text-[9px] font-black text-red-600 block uppercase tracking-widest mb-1">Inversión Mensual</span>
+                                    <div class="text-3xl font-black text-white">$4.522.000</div>
+                                    <span class="text-[8px] font-bold text-gray-500 uppercase tracking-widest">IVA Incluido</span>
+                                </div>
+                            </div>
+                            <div class="grid md:grid-cols-2 gap-x-8 gap-y-3 mb-10">
+                                <ul class="text-[10px] text-gray-300 uppercase tracking-widest space-y-3 list-none">
+                                    <li>✅ 12 Reels Estratégicos Premium</li>
+                                    <li>✅ 8 Diseños Publicitarios Profesionales</li>
+                                    <li>✅ 4 Jornadas de Grabación</li>
+                                    <li>✅ Producción Audiovisual Avanzada</li>
+                                    <li>✅ Dirección Creativa Mensual</li>
+                                </ul>
+                                <ul class="text-[10px] text-gray-300 uppercase tracking-widest space-y-3 list-none">
+                                    <li>✅ Administración Avanzada Meta Ads</li>
+                                    <li>✅ Seguimiento y Optimización Constante</li>
+                                    <li>✅ Copywriting Estratégico</li>
+                                    <li>✅ Prioridad en Entregas</li>
+                                    <li>✅ Estrategia Personalizada</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white/5 rounded-3xl p-6 border border-red-900/40 mb-8">
+                                <h4 class="text-sm font-black text-white uppercase mb-2 tracking-tighter">ESCALAMIENTO COMPARTIDO 🚀</h4>
+                                <p class="text-[10px] text-gray-400 leading-relaxed">Modelo de crecimiento conjunto basado en resultados medibles.</p>
+                            </div>
+                            <div class="mt-auto text-center border-t border-white/10 pt-6">
+                                <a href="https://wa.me/573171157534" class="bg-white/10 text-white py-5 rounded-2xl text-[12px] font-black uppercase w-full block hover:bg-white hover:text-black transition">Consultar Élite</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </section>
+
+        <section id="instagram" class="mb-64">
+            <div class="mb-12 sm:mb-20 reveal text-center">
+                <h2 class="mega-title">SÍGUENOS EN <br><span class="text-red-700 subtitle-smaller">INSTAGRAM</span></h2>
+                <p class="text-gray-400 text-sm mt-6 uppercase tracking-widest">@prayerprod</p>
+            </div>
+            <div class="reveal">
+                <!-- Elfsight Instagram Feed -->
+                <script src="https://elfsightcdn.com/platform.js" async></script>
+                <div class="elfsight-app-9cb81e8b-c464-4960-bf16-00896553dcce" data-elfsight-app-lazy></div>
+            </div>
+            <div class="reveal text-center mt-12">
+                <a href="https://instagram.com/prayerprod" target="_blank" class="inline-block bg-gradient-to-r from-pink-500 to-red-700 text-white px-12 py-4 rounded-2xl text-[12px] font-black uppercase hover:scale-110 transition-transform">Seguir en Instagram</a>
+            </div>
+        </section>
+
+        <section id="contacto" class="reveal bg-red-900/10 border border-red-900/20 text-center py-16 sm:py-32 px-4 sm:px-8 rounded-3xl sm:rounded-[48px] mx-auto max-w-5xl">
+            <h2 class="mega-title mb-6 sm:mb-8 uppercase text-white">Hagamos algo <br> <span class="text-red-700">Memorable</span></h2>
+            <a href="https://wa.me/573171157534" class="inline-block bg-white text-black px-8 sm:px-12 py-3 sm:py-5 rounded-xl sm:rounded-2xl text-[10px] sm:text-[12px] font-black uppercase hover:scale-110 transition-transform">Agendar Consultoría</a>
+        </section>
+
+    </main>
+
+    <footer class="py-12 border-t border-white/5 text-center px-6">
+        <p class="text-[9px] text-gray-700 uppercase tracking-[0.5em]">© 2026 Prayer Producciones. Cali, Colombia.</p>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Datos del Portafolio
+        const portfolioData = {
+            reels: [
+                'reels/4 Reel V x el M.mp4',
+                'reels/Copia de CAPAS SELECCION.mp4',
+                'reels/Copia de Reel 2 de abril.mp4',
+                'reels/PRAYER PRIMER ANUNCIO.mp4',
+                'reels/Reel 2 mayo.mp4',
+                'reels/Shorts 1 YT cap 2.mp4',
+                'reels/copy_1949FF4D-D123-4415-80AE-1259CB0DFCCC.mp4',
+                'reels/copy_8C1C51F4-44D3-4C81-8D2E-28476B480FE3.mp4',
+                'reels/copy_F4E3AD79-C266-42B5-AFB5-CA1F6A3C1742.mp4',
+                'reels/final v-4 vertical .mp4'
+            ],
+            flyers: [
+                'flyers/sn-psicotrading.png',
+                'flyers/prayer-flyer-main.jpg',
+                'flyers/flyer-cuellar-publi.png',
+                'flyers/flyer-mujer-pulso.png',
+                'flyers/master-mind-v3.png',
+                'flyers/sn-basestrafing-v4.png',
+                'flyers/flyer-retro-jueves.png',
+                'flyers/flyer mundial.png'
+            ],
+            fotografia: [
+                'fotografia/42BB05E5-0F2A-4E8B-95A7-4F4B363BB836.PNG',
+                'fotografia/79A65EDF-74A8-4540-A4E7-1372CB6FC576.PNG',
+                'fotografia/A619E424-7793-409E-BDB2-97C14EBE50E7.PNG',
+                'fotografia/A707E3E2-B6E8-4EAD-B34C-0EE3D19B0AF2.PNG',
+                'fotografia/DSC00945.jpg',
+                'fotografia/DSC01047.jpg',
+                'fotografia/DSC01085.JPG',
+                'fotografia/DSC01763.JPG',
+                'fotografia/DSC02192.JPG',
+                'fotografia/DSC02417.JPG',
+                'fotografia/DSC04730.JPG',
+                'fotografia/DSC08459.JPG',
+                'fotografia/IMG_0372.JPG',
+                'fotografia/IMG_0739.JPG',
+                'fotografia/IMG_4377 2.JPG'
+            ],
+            'videos-musicales': [],
+            branding: []
+        };
+
+        let portfolioSwiper;
+
+        function initPortfolioSwiper() {
+            if (portfolioSwiper) portfolioSwiper.destroy(true, true);
+            
+            portfolioSwiper = new Swiper(".portfolioSwiper", {
+                effect: "coverflow",
+                grabCursor: true,
+                centeredSlides: true,
+                slidesPerView: "auto",
+                coverflowEffect: {
+                    rotate: 5,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 2,
+                    slideShadows: true,
+                },
+                pagination: { el: ".swiper-pagination", clickable: true },
+                breakpoints: {
+                    320: { slidesPerView: 1.2, spaceBetween: 20 },
+                    768: { slidesPerView: 2.5, spaceBetween: 30 },
+                    1024: { slidesPerView: 3.5, spaceBetween: 40 }
+                }
+            });
+        }
+
+        function shuffle(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function filterPortfolio(category, btn) {
+            // Actualizar botones
+            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const wrapper = document.getElementById('portfolio-wrapper');
+            wrapper.style.opacity = '0';
+
+            setTimeout(() => {
+                wrapper.innerHTML = '';
+                let items = portfolioData[category] || [];
+
+                // Si es fotografía, baraja aleatoriamente
+                if(category === 'fotografia') {
+                    items = shuffle(items);
+                }
+
+                if(items.length === 0) {
+                    wrapper.innerHTML = '<div class="text-center w-full py-20 text-gray-500 uppercase text-[10px] tracking-widest">Próximamente...</div>';
+                } else {
+                    items.forEach(src => {
+                        const isVideo = src.endsWith('.mp4') || src.endsWith('.mov');
+                        const content = isVideo
+                            ? `<video autoplay muted loop playsinline class="w-full h-full object-cover"><source src="${src}" type="video/mp4"></video>`
+                            : `<img src="${src}" class="w-full h-full object-cover" alt="Portfolio Item">`;
+
+                        wrapper.innerHTML += `
+                            <div class="swiper-slide">
+                                <div class="portfolio-video-card">
+                                    ${content}
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+
+                initPortfolioSwiper();
+                wrapper.style.opacity = '1';
+                gsap.from(".swiper-slide", { opacity: 0, scale: 0.8, duration: 0.6, stagger: 0.1, ease: "back.out(1.7)" });
+            }, 300);
+        }
+
+        // Swiper de Planes
+        const swiper = new Swiper(".mySwiper", {
+            effect: "coverflow",
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: "auto",
+            initialSlide: 1,
+            coverflowEffect: { rotate: 0, stretch: 0, depth: 100, modifier: 2.5, slideShadows: false },
+            pagination: { el: ".swiper-pagination", clickable: true },
+            breakpoints: { 320: { slidesPerView: 1.1, spaceBetween: 20 }, 1024: { slidesPerView: 1.3, spaceBetween: 40 } }
+        });
+
+        // Animaciones de Revelación
+        gsap.utils.toArray(".reveal").forEach((el) => {
+            gsap.to(el, { opacity: 1, y: 0, duration: 1.5, ease: "expo.out", scrollTrigger: { trigger: el, start: "top 90%" } });
+        });
+
+        // Inicializar por defecto
+        window.onload = () => {
+            filterPortfolio('reels', document.querySelector('.category-btn'));
+        };
+    </script>
+</body>
+</html>
